@@ -24,4 +24,8 @@ public class TotalOrderPrice {
         this.totalOrderPrice = calculatedTotalOrderPrice;
         return this.totalOrderPrice;
     }
+
+    public String generateTotalOrderPriceOutput() {
+        return String.format("%,d원", totalOrderPrice);
+    }
 }
