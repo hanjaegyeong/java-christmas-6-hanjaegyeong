@@ -3,12 +3,13 @@ package christmas.domain.decorator;
 import christmas.domain.DiscountEvents;
 import christmas.domain.strategy.BasicDiscountStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class AdditionalDiscountDecoratorFactory {
-    public static BasicDiscountStrategy createDiscountStrategy(int day, BasicDiscountStrategy discountStrategy, DiscountEvents discountEvents) {
+    private static final Set<Integer> SPECIAL_DAYS = Set.of(3, 10, 17, 24, 25, 31);
+    private static final int CHRISTMAS_DDAY = 25;
 
+    public static BasicDiscountStrategy createDiscountStrategy(int day, BasicDiscountStrategy discountStrategy, DiscountEvents discountEvents) {
         if (isSpecialDay(day)) {
             discountStrategy = new SpecialDiscountDecorator(discountStrategy, discountEvents);
         }
@@ -21,14 +22,10 @@ public class AdditionalDiscountDecoratorFactory {
     }
 
     private static boolean isSpecialDay(int day) {
-        // 별표 날짜 판단 로직
-        // 여기 리스트 부분 상수화, 클린코드로 변경하기!
-        List<Integer> specialDay = new ArrayList<>(List.of(3, 10, 17, 24, 25, 31));
-        return specialDay.contains(day);
+        return SPECIAL_DAYS.contains(day);
     }
 
     private static boolean isChristmasDDay(int day) {
-        // 크리스마스 날짜 판단 로직
-        return day <= 25;
+        return day <= CHRISTMAS_DDAY;
     }
 }
