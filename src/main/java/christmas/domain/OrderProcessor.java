@@ -102,4 +102,8 @@ public class OrderProcessor {
         }
         throw new IllegalArgumentException("[ERROR] 음료만 주문 시 주문할 수 없습니다. 다시 주문해 주십시오");
     }
+
+    public EnumMap<Menu, Integer> getOrderMenus() {
+        return orderMenus;
+    }
 }
