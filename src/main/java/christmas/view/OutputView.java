@@ -13,4 +13,10 @@ public class OutputView {
         System.out.println(text);
         System.out.print(LINE_SEPARATOR);
     }
+
+    public static void printGiftEventSummary(String text) {
+        System.out.println("<증정 메뉴>");
+        System.out.println(text);
+        System.out.print(LINE_SEPARATOR);
+    }
 }
