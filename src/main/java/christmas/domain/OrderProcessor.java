@@ -103,6 +103,21 @@ public class OrderProcessor {
         throw new IllegalArgumentException("[ERROR] 음료만 주문 시 주문할 수 없습니다. 다시 주문해 주십시오");
     }
 
+    public static String generateOrderOutput(EnumMap<Menu, Integer> orderMap) {
+        StringBuilder orderStringBuilder = new StringBuilder();
+
+        for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
+            Menu menu = entry.getKey();
+            int quantity = entry.getValue();
+            orderStringBuilder.append(menu.getName())
+                    .append(" ")
+                    .append(quantity)
+                    .append("개\n");
+        }
+
+        return orderStringBuilder.toString();
+    }
+
     public EnumMap<Menu, Integer> getOrderMenus() {
         return orderMenus;
     }
