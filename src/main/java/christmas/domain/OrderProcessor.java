@@ -21,6 +21,7 @@ public class OrderProcessor {
         }
 
         validateTotalQuantity();
+        validateOnlyDrinkCategory();
     }
 
     private List<String> splitOrders(String userInput) {
@@ -91,5 +92,14 @@ public class OrderProcessor {
         if (totalQuantity > MAX_TOTAL_QUANTITY) {
             throw new IllegalArgumentException("[오류] 총 주문 수량은 " + MAX_TOTAL_QUANTITY + "개를 초과할 수 없습니다.");
         }
+    }
+
+    private void validateOnlyDrinkCategory() {
+        for (Menu menu : orderMenus.keySet()) {
+            if (menu.getCategory() != MenuCategory.DRINK) {
+                return;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 음료만 주문 시 주문할 수 없습니다. 다시 주문해 주십시오");
     }
 }
