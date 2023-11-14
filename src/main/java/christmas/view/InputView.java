@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class InputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String INVALID_NUMBER_MESSAGE = "[ERROR] 유효하지 않은 입력입니다. 숫자만 입력해 주세요.";
 
     public static int inputReservationDay() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.\n" +
@@ -18,11 +19,11 @@ public class InputView {
         return stringToInt(inputInt);
     }
 
-    public static int stringToInt(String text) throws IllegalArgumentException {
+    public static int stringToInt(String text) {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
         }
     }
 
