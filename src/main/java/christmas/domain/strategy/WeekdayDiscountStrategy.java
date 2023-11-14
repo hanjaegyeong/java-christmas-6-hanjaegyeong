@@ -1,20 +1,20 @@
 package christmas.domain.strategy;
 
 import christmas.domain.DiscountEvents;
-import christmas.domain.OrderProcessor;
+import christmas.domain.Order;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuCategory;
 
 import java.util.EnumMap;
 
 public class WeekdayDiscountStrategy implements BasicDiscountStrategy {
-    private final OrderProcessor orderProcessor;
+    private final Order orderProcessor;
     private final DiscountEvents discountPrices;
 
     private static final String WEEKDAY_DISCOUNT = "평일 할인";
     private static final int DESSERT_DISCOUNT_AMOUNT = 2023;
 
-    public WeekdayDiscountStrategy(OrderProcessor orderProcessor, DiscountEvents discountPrices) {
+    public WeekdayDiscountStrategy(Order orderProcessor, DiscountEvents discountPrices) {
         this.orderProcessor = orderProcessor;
         this.discountPrices = discountPrices;
     }
