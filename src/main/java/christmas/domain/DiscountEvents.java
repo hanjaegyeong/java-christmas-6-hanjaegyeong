@@ -21,11 +21,28 @@ public class DiscountEvents {
         }
     }
 
-    public String getTotalDiscountOutput(int totalDiscountAmount) {
-        if (totalDiscountAmount != 0) {
-            return String.format("-%,d원", totalDiscountAmount);
+    public String generateAllDiscountEventsString() {
+        StringBuilder formattedDiscountEvents = new StringBuilder();
+
+        if (discountEvents.isEmpty()) {
+            return "없음";
         }
-        return "없음";
+
+        int count = 0;
+        for (Map.Entry<String, Integer> discountEntry : discountEvents.entrySet()) {
+            String eventName = discountEntry.getKey();
+            int discountPrice = discountEntry.getValue();
+
+            String formattedDiscount = String.format("%s: -%,d원", eventName, discountPrice);
+            formattedDiscountEvents.append(formattedDiscount);
+
+            // 현재 엔트리가 마지막이 아니라면 줄바꿈 추가
+            if (++count < discountEvents.size()) {
+                formattedDiscountEvents.append("\n");
+            }
+        }
+
+        return formattedDiscountEvents.toString();
     }
 
     public int calculateTotalDiscountPrice() {
