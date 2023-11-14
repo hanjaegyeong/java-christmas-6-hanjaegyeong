@@ -37,4 +37,10 @@ public class OutputView {
         System.out.printf("%,d원\n", price); //여기 -원도 스트링 만들어서 오기
         System.out.print(LINE_SEPARATOR);
     }
+
+    public static void printEventBadge(String text) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(text);
+        System.out.print(LINE_SEPARATOR);
+    }
 }
