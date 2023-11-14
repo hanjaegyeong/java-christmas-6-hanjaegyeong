@@ -11,6 +11,9 @@ public class WeekendDiscountStrategy implements BasicDiscountStrategy {
     private final OrderProcessor orderProcessor;
     private final DiscountEvents discountEvents;
 
+    private static final String WEEKEND_DISCOUNT = "주말 할인";
+    private static final int MAIN_COURSE_DISCOUNT_AMOUNT = 2023;
+
     public WeekendDiscountStrategy(OrderProcessor orderProcessor, DiscountEvents discountEvents) {
         this.orderProcessor = orderProcessor;
         this.discountEvents = discountEvents;
@@ -23,17 +26,16 @@ public class WeekendDiscountStrategy implements BasicDiscountStrategy {
         int weekendDiscount = calculateDiscountedPrice(orderMenus);
 
         if (weekendDiscount != 0) {
-            discountEvents.addDiscountEvent("주말 할인", weekendDiscount);
+            discountEvents.addDiscountEvent(WEEKEND_DISCOUNT, weekendDiscount);
         }
     }
 
-    // 여기 코드 좀 더 뜯어보기!
     private static int calculateDiscountedPrice(EnumMap<Menu, Integer> orderMenus) {
         int discountedPrice = 0;
-        for (Menu menu : Menu.values()) {
+        for (Menu menu : orderMenus.keySet()) {
             if (menu.getCategory() == MenuCategory.MAIN_COURSE) {
                 int quantity = orderMenus.getOrDefault(menu, 0);
-                discountedPrice += quantity * 2023; // 상수화!
+                discountedPrice += quantity * MAIN_COURSE_DISCOUNT_AMOUNT;
             }
         }
         return discountedPrice;
