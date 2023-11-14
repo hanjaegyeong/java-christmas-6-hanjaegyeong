@@ -26,6 +26,8 @@ public class OrderProcessor {
     }
 
     private void processOrder(String order) {
+        validateOrderFormat(order);
+
         List<String> menuAndQuantity = splitMenuAndQuantity(order);
         String menuName = extractMenuName(menuAndQuantity);
         int quantity = extractQuantity(menuAndQuantity);
@@ -59,5 +61,11 @@ public class OrderProcessor {
             }
         }
         throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
+    private void validateOrderFormat(String order) {
+        if (!order.contains("-")) {
+            throw new IllegalArgumentException("[오류] 주문 형식이 올바르지 않습니다. 메뉴와 수량은 하이픈(-)으로 구분되어야 합니다.");
+        }
     }
 }
