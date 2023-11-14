@@ -2,7 +2,6 @@ package christmas.view;
 
 public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String CURRENCY_SUFFIX = "원";
     private static final String ORDER_SUMMARY_TITLE = "<주문 메뉴>";
     private static final String TOTAL_ORDER_AMOUNT_TITLE = "<할인 전 총주문 금액>";
     private static final String GIFT_EVENT_SUMMARY_TITLE = "<증정 메뉴>";
