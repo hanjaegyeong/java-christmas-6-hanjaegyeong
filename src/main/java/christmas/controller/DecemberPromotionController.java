@@ -2,7 +2,7 @@ package christmas.controller;
 
 import christmas.domain.*;
 import christmas.domain.decorator.AdditionalDiscountDecoratorFactory;
-import christmas.domain.price.TotalOrderPrice;
+import christmas.domain.price.TotalOrderAmount;
 import christmas.domain.strategy.BasicDiscountStrategy;
 import christmas.domain.strategy.BasicDiscountStrategyFactory;
 import christmas.view.InputView;
@@ -25,11 +25,11 @@ public class DecemberPromotionController {
 
         Order order = createAndValidateOrder();
 
-        TotalOrderPrice totalOrderPriceCalculator = new TotalOrderPrice();
-        int totalOrderPrice = totalOrderPriceCalculator.calculateTotalOrderPrice(order.getOrderMenus());
+        TotalOrderAmount totalOrderAmountCalculator = new TotalOrderAmount();
+        int totalOrderAmount = totalOrderAmountCalculator.calculateTotalOrderAmount(order.getOrderMenus());
 
-        DiscountEvents discountEvents = applyDiscountsIfNeeded(order, totalOrderPrice, reservationDay);
-        printOrderSummary(order, discountEvents, totalOrderPrice);
+        DiscountEvents discountEvents = applyDiscountsIfNeeded(order, totalOrderAmount, reservationDay);
+        printOrderSummary(order, discountEvents, totalOrderAmount);
     }
 
     private Order createAndValidateOrder() {
@@ -39,9 +39,9 @@ public class DecemberPromotionController {
         return order;
     }
 
-    private DiscountEvents applyDiscountsIfNeeded(Order order, int totalOrderPrice, int reservationDay) {
+    private DiscountEvents applyDiscountsIfNeeded(Order order, int totalOrderAmount, int reservationDay) {
         DiscountEvents discountEvents = new DiscountEvents();
-        if (totalOrderPrice >= MINIMUM_ORDER_AMOUNT_FOR_DISCOUNT) {
+        if (totalOrderAmount >= MINIMUM_ORDER_AMOUNT_FOR_DISCOUNT) {
             BasicDiscountStrategy baseStrategy = BasicDiscountStrategyFactory.createDiscountStrategy(reservationDay, order, discountEvents);
             BasicDiscountStrategy strategy = AdditionalDiscountDecoratorFactory.createDiscountStrategy(reservationDay, baseStrategy, discountEvents);
             strategy.applyDiscount();
@@ -49,18 +49,18 @@ public class DecemberPromotionController {
         return discountEvents;
     }
 
-    private void printOrderSummary(Order order, DiscountEvents discountEvents, int totalOrderPrice) {
+    private void printOrderSummary(Order order, DiscountEvents discountEvents, int totalOrderAmount) {
         OutputView.printOrderSummary(Order.generateOrderOutput(order.getOrderMenus()));
-        OutputView.printTotalOrderPrice(new TotalOrderPrice().formatTotalOrderPrice());
-        OutputView.printGiftEventSummary(GiftEvent.generateGiftEventOutput(totalOrderPrice, discountEvents));
+        OutputView.printTotalOrderAmount(new TotalOrderAmount().formatTotalOrderAmount());
+        OutputView.printGiftEventSummary(GiftEvent.generateGiftEventOutput(totalOrderAmount, discountEvents));
         OutputView.printDiscountSummary(discountEvents.formatAppliedEventsOutput());
         OutputView.printTotalBenefits(discountEvents.formatTotalDiscountAmountOutput());
-        OutputView.printFinalPrice(calculateFinalPrice(totalOrderPrice, discountEvents));
+        OutputView.printFinalAmount(calculateFinalAmount(totalOrderAmount, discountEvents));
         printEventBadge(discountEvents);
     }
 
-    private int calculateFinalPrice(int totalOrderPrice, DiscountEvents discountEvents) {
-        return totalOrderPrice - discountEvents.getTotalDiscountAmount();
+    private int calculateFinalAmount(int totalOrderAmount, DiscountEvents discountEvents) {
+        return totalOrderAmount - discountEvents.getTotalDiscountAmount();
     }
 
     private void printEventBadge(DiscountEvents discountEvents) {

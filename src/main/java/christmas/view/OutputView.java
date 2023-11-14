@@ -4,19 +4,19 @@ public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String CURRENCY_SUFFIX = "원";
     private static final String ORDER_SUMMARY_TITLE = "<주문 메뉴>";
-    private static final String TOTAL_ORDER_PRICE_TITLE = "<할인 전 총주문 금액>";
+    private static final String TOTAL_ORDER_AMOUNT_TITLE = "<할인 전 총주문 금액>";
     private static final String GIFT_EVENT_SUMMARY_TITLE = "<증정 메뉴>";
     private static final String DISCOUNT_SUMMARY_TITLE = "<혜택 내역>";
     private static final String TOTAL_BENEFITS_TITLE = "<총혜택 금액>";
-    private static final String FINAL_PRICE_TITLE = "<할인 후 예상 결제 금액>";
+    private static final String FINAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
     private static final String EVENT_BADGE_TITLE = "<12월 이벤트 배지>";
 
     public static void printOrderSummary(String text) {
         printWithTitle(ORDER_SUMMARY_TITLE, text);
     }
 
-    public static void printTotalOrderPrice(String text) {
-        printWithTitle(TOTAL_ORDER_PRICE_TITLE, text);
+    public static void printTotalOrderAmount(String text) {
+        printWithTitle(TOTAL_ORDER_AMOUNT_TITLE, text);
     }
 
     public static void printGiftEventSummary(String text) {
@@ -31,9 +31,9 @@ public class OutputView {
         printWithTitle(TOTAL_BENEFITS_TITLE, text);
     }
 
-    public static void printFinalPrice(int price) {
-        System.out.println(FINAL_PRICE_TITLE);
-        System.out.printf("%,d" + CURRENCY_SUFFIX + LINE_SEPARATOR, price);
+    public static void printFinalAmount(int finalAmount) {
+        System.out.println(FINAL_AMOUNT_TITLE);
+        System.out.printf("%,d" + CURRENCY_SUFFIX + LINE_SEPARATOR, finalAmount);
     }
 
     public static void printEventBadge(String text) {
