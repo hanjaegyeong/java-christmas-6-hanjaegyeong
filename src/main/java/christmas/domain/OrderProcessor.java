@@ -6,12 +6,18 @@ import christmas.domain.menu.MenuCategory;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OrderProcessor {
     private static final int MAX_TOTAL_QUANTITY = 20;
+    private static final String INVALID_ORDER_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
+    private static final String ORDER_SEPARATOR = "-";
+    private static final String QUANTITY_SUFFIX = "개";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+
 
     private final EnumMap<Menu, Integer> orderMenus = new EnumMap<>(Menu.class);
+    private int totalQuantity = 0;
 
     public void createOrder(String userInput) {
         List<String> orders = splitOrders(userInput);
@@ -21,7 +27,7 @@ public class OrderProcessor {
         }
 
         validateTotalQuantity();
-        validateOnlyDrinkCategory();
+        preventOnlyDrinkOrders();
     }
 
     private List<String> splitOrders(String userInput) {
@@ -41,10 +47,11 @@ public class OrderProcessor {
         checkForDuplicateMenu(menu);
 
         orderMenus.put(menu, quantity);
+        totalQuantity += quantity;
     }
 
     private List<String> splitMenuAndQuantity(String order) {
-        return Arrays.asList(order.split("-"));
+        return Arrays.asList(order.split(ORDER_SEPARATOR));
     }
 
     private String extractMenuName(List<String> menuAndQuantity) {
@@ -56,19 +63,19 @@ public class OrderProcessor {
         try {
             return Integer.parseInt(quantityString);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
     }
 
     private void validateQuantity(int quantity) {
         if (quantity < 1) {
-            throw new IllegalArgumentException("[오류] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
     }
 
     private void checkForDuplicateMenu(Menu menu) {
         if (orderMenus.containsKey(menu)) {
-            throw new IllegalArgumentException("[오류] 중복된 메뉴명이 있습니다. 다시 입력해 주세요.");
+            throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
     }
 
@@ -78,44 +85,33 @@ public class OrderProcessor {
                 return menu;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
     }
 
     private void validateOrderFormat(String order) {
         if (!order.contains("-")) {
-            throw new IllegalArgumentException("[오류] 주문 형식이 올바르지 않습니다. 메뉴와 수량은 하이픈(-)으로 구분되어야 합니다.");
+            throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
     }
 
     private void validateTotalQuantity() {
-        int totalQuantity = orderMenus.values().stream().mapToInt(Integer::intValue).sum();
         if (totalQuantity > MAX_TOTAL_QUANTITY) {
-            throw new IllegalArgumentException("[오류] 총 주문 수량은 " + MAX_TOTAL_QUANTITY + "개를 초과할 수 없습니다.");
+            throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
     }
 
-    private void validateOnlyDrinkCategory() {
-        for (Menu menu : orderMenus.keySet()) {
-            if (menu.getCategory() != MenuCategory.DRINK) {
-                return;
-            }
+    private void preventOnlyDrinkOrders() {
+        boolean onlyDrinks = orderMenus.keySet().stream()
+                .allMatch(menu -> menu.getCategory() == MenuCategory.DRINK);
+        if (onlyDrinks) {
+            throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
-        throw new IllegalArgumentException("[ERROR] 음료만 주문 시 주문할 수 없습니다. 다시 주문해 주십시오");
     }
 
     public static String generateOrderOutput(EnumMap<Menu, Integer> orderMap) {
-        StringBuilder orderStringBuilder = new StringBuilder();
-
-        for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
-            Menu menu = entry.getKey();
-            int quantity = entry.getValue();
-            orderStringBuilder.append(menu.getName())
-                    .append(" ")
-                    .append(quantity)
-                    .append("개\n");
-        }
-
-        return orderStringBuilder.toString();
+        return orderMap.entrySet().stream()
+                .map(entry -> entry.getKey().getName() + " " + entry.getValue() + QUANTITY_SUFFIX)
+                .collect(Collectors.joining(LINE_SEPARATOR)) + LINE_SEPARATOR;
     }
 
     public EnumMap<Menu, Integer> getOrderMenus() {
