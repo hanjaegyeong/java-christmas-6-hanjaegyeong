@@ -7,4 +7,10 @@ public class OutputView {
         System.out.println("<주문 메뉴>");
         System.out.println(text);
     }
+
+    public static void printTotalOrderPrice(String text) {
+        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(text);
+        System.out.print(LINE_SEPARATOR);
+    }
 }
