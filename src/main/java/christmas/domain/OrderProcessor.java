@@ -19,6 +19,8 @@ public class OrderProcessor {
         for (String order : orders) {
             processOrder(order);
         }
+
+        validateTotalQuantity();
     }
 
     private List<String> splitOrders(String userInput) {
@@ -81,6 +83,13 @@ public class OrderProcessor {
     private void validateOrderFormat(String order) {
         if (!order.contains("-")) {
             throw new IllegalArgumentException("[오류] 주문 형식이 올바르지 않습니다. 메뉴와 수량은 하이픈(-)으로 구분되어야 합니다.");
+        }
+    }
+
+    private void validateTotalQuantity() {
+        int totalQuantity = orderMenus.values().stream().mapToInt(Integer::intValue).sum();
+        if (totalQuantity > MAX_TOTAL_QUANTITY) {
+            throw new IllegalArgumentException("[오류] 총 주문 수량은 " + MAX_TOTAL_QUANTITY + "개를 초과할 수 없습니다.");
         }
     }
 }
