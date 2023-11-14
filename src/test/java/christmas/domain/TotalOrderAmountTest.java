@@ -23,10 +23,10 @@ public class TotalOrderAmountTest {
     public void testCalculateTotalOrderAmount() {
         EnumMap<Menu, Integer> orderMenus = new EnumMap<>(Menu.class);
         orderMenus.put(Menu.MUSHROOM_SOUP, 2);
-        orderMenus.put(Menu.TAPAS, 1);
+        orderMenus.put(Menu.TAPAS, 2);
         orderMenus.put(Menu.ZERO_COLA, 3);
 
-        int expectedTotalAmount = (Menu.MUSHROOM_SOUP.getPrice() * 2) + (Menu.TAPAS.getPrice() * 1) + (Menu.ZERO_COLA.getPrice() * 3);
+        int expectedTotalAmount = (Menu.MUSHROOM_SOUP.getPrice() * 2) + (Menu.TAPAS.getPrice() * 2) + (Menu.ZERO_COLA.getPrice() * 3);
         int actualTotalAmount = totalOrderAmount.calculateTotalOrderAmount(orderMenus);
 
         assertEquals(expectedTotalAmount, actualTotalAmount);
