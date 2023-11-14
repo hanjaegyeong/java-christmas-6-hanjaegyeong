@@ -19,4 +19,10 @@ public class OutputView {
         System.out.println(text);
         System.out.print(LINE_SEPARATOR);
     }
+
+    public static void printDiscountSummary(String text) {
+        System.out.println("<혜택 내역>");
+        System.out.println(text);
+        System.out.print(LINE_SEPARATOR);
+    }
 }
