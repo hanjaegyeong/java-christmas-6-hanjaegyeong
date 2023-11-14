@@ -35,6 +35,7 @@ public class OrderProcessor {
         validateQuantity(quantity);
 
         Menu menu = findMenuByName(menuName);
+        checkForDuplicateMenu(menu);
 
         orderMenus.put(menu, quantity);
     }
@@ -59,6 +60,12 @@ public class OrderProcessor {
     private void validateQuantity(int quantity) {
         if (quantity < 1) {
             throw new IllegalArgumentException("[오류] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private void checkForDuplicateMenu(Menu menu) {
+        if (orderMenus.containsKey(menu)) {
+            throw new IllegalArgumentException("[오류] 중복된 메뉴명이 있습니다. 다시 입력해 주세요.");
         }
     }
 
