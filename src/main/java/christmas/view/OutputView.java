@@ -31,9 +31,8 @@ public class OutputView {
         printWithTitle(TOTAL_BENEFITS_TITLE, text);
     }
 
-    public static void printFinalAmount(int finalAmount) {
-        System.out.println(FINAL_AMOUNT_TITLE);
-        System.out.printf("%,d" + CURRENCY_SUFFIX + LINE_SEPARATOR, finalAmount);
+    public static void printFinalAmount(String text) {
+        printWithTitle(FINAL_AMOUNT_TITLE, text);
     }
 
     public static void printEventBadge(String text) {

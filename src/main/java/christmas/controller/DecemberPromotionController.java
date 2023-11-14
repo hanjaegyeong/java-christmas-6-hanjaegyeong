@@ -55,12 +55,8 @@ public class DecemberPromotionController {
         OutputView.printGiftEventSummary(GiftEvent.generateGiftEventOutput(totalOrderAmount, discountEvents));
         OutputView.printDiscountSummary(discountEvents.formatAppliedEventsOutput());
         OutputView.printTotalBenefits(discountEvents.formatTotalDiscountAmountOutput());
-        OutputView.printFinalAmount(calculateFinalAmount(totalOrderAmount, discountEvents));
+        OutputView.printFinalAmount(FinalAmount.calculateAndFormatFinalAmountOutput(totalOrderAmount, discountEvents));
         printEventBadge(discountEvents);
-    }
-
-    private int calculateFinalAmount(int totalOrderAmount, DiscountEvents discountEvents) {
-        return totalOrderAmount - discountEvents.getTotalDiscountAmount();
     }
 
     private void printEventBadge(DiscountEvents discountEvents) {
