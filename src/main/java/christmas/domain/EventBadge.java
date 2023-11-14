@@ -15,4 +15,18 @@ public enum EventBadge {
         this.badgeName = badgeName;
         this.discountPrice = discountPrice;
     }
+
+    // 가격에 해당하는 이벤트 배지 찾기
+    // 혜택은 benefit?
+    public static String findBadgeByPrice(int totalDiscountPrice) {
+        EventBadge eventBadge = Arrays.stream(values())
+                .filter(badge -> badge.discountPrice <= totalDiscountPrice)
+                .max(Comparator.comparingInt(badge -> badge.discountPrice))
+                .orElse(null);
+
+        if (eventBadge != null) {
+            return eventBadge.badgeName;
+        }
+        return "없음";
+    }
 }
