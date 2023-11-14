@@ -3,8 +3,10 @@ package christmas.domain.decorator;
 import christmas.domain.DiscountEvents;
 import christmas.domain.strategy.BasicDiscountStrategy;
 
-// reservationDay, discountPrices를 매개변수로 받아서 필드 세팅하는 것보다 좋은 방법이 없을까?
 public class ChristmasDDayDiscountDecorator extends AdditionalDiscountDecorator {
+    private static final int BASE_DISCOUNT_AMOUNT = 1000;
+    private static final int DAILY_INCREMENT = 100;
+
     private final int reservationDay;
     private final DiscountEvents discountEvents;
 
@@ -16,19 +18,16 @@ public class ChristmasDDayDiscountDecorator extends AdditionalDiscountDecorator 
 
     @Override
     public void applyDiscount() {
-        super.applyDiscount(); // 상위 함수들 연쇄호출
-        
-        int ChristmasDDayDiscount = calculateDiscountPrice();
+        super.applyDiscount();
 
-        if (ChristmasDDayDiscount != 0) {
-            discountEvents.addDiscountEvent("크리스마스 디데이 할인", ChristmasDDayDiscount);
+        int christmasDDayDiscount = calculateChristmasDDayDiscount();
+
+        if (christmasDDayDiscount != 0) {
+            discountEvents.addDiscountEvent("크리스마스 디데이 할인", christmasDDayDiscount);
         }
     }
 
-    // 다 상수화!
-    private int calculateDiscountPrice() {
-        // 할인 금액 계산 (1,000원으로 시작하여 날짜에 따라 100원씩 증가)
-        int baseDiscount = 1000;
-        return (reservationDay - 1) * 100 + baseDiscount;
+    private int calculateChristmasDDayDiscount() {
+        return (reservationDay - 1) * DAILY_INCREMENT + BASE_DISCOUNT_AMOUNT;
     }
 }
