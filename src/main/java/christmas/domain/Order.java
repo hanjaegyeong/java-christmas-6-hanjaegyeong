@@ -8,7 +8,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderProcessor {
+public class Order {
     private static final int MAX_TOTAL_QUANTITY = 20;
     private static final String INVALID_ORDER_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String ORDER_SEPARATOR = "-";
