@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class AdditionalDiscountDecoratorFactory {
     private static final Set<Integer> SPECIAL_DAYS = Set.of(3, 10, 17, 24, 25, 31);
-    private static final int CHRISTMAS_DDAY = 25;
+    private static final int CHRISTMAS_DAY = 25;
 
     public static BasicDiscountStrategy createDiscountStrategy(int day, BasicDiscountStrategy discountStrategy, DiscountEvents discountEvents) {
         if (isSpecialDay(day)) {
@@ -26,6 +26,6 @@ public class AdditionalDiscountDecoratorFactory {
     }
 
     private static boolean isChristmasDDay(int day) {
-        return day <= CHRISTMAS_DDAY;
+        return day <= CHRISTMAS_DAY;
     }
 }
