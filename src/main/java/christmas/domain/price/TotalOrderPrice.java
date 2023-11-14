@@ -1,31 +1,22 @@
 package christmas.domain.price;
 
 import christmas.domain.menu.Menu;
-
 import java.util.EnumMap;
-import java.util.Map;
+
+import static christmas.utils.constants.WON;
 
 public class TotalOrderPrice {
     private int totalOrderPrice;
 
-    // calculate가 나을까?
-    public int generateTotalOrderPrice(EnumMap<Menu, Integer> orderMenus) {
-        int calculatedTotalOrderPrice = 0;
+    public int calculateTotalOrderPrice(EnumMap<Menu, Integer> orderMenus) {
+        totalOrderPrice = orderMenus.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
 
-        // EnumMap을 순회하면서 각 메뉴의 가격과 수량을 곱하여 총 가격 계산
-        for (Map.Entry<Menu, Integer> menuEntry : orderMenus.entrySet()) {
-            Menu menu = menuEntry.getKey();
-            int quantity = menuEntry.getValue();
-            int menuPrice = menu.getPrice();
-
-            calculatedTotalOrderPrice += menuPrice * quantity;
-        }
-
-        this.totalOrderPrice = calculatedTotalOrderPrice;
-        return this.totalOrderPrice;
+        return totalOrderPrice;
     }
 
-    public String generateTotalOrderPriceOutput() {
-        return String.format("%,d원", totalOrderPrice);
+    public String formatTotalOrderPrice() {
+        return String.format("%,d%s", totalOrderPrice, WON);
     }
 }
