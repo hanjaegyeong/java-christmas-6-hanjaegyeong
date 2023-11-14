@@ -4,55 +4,57 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-// 혜택 내역 + 총 할인 금액
-public class DiscountEvents {
-    private final Map<String, Integer> discountEvents = new HashMap<>();
-    private int totalDiscountPrice = 0; // 총 할인 금액 래핑 고민하기***
+import static christmas.utils.constants.NOTHING;
+import static christmas.utils.constants.WON;
 
-    public int getTotalDiscountPrice() {
-        return totalDiscountPrice;
-    }
+public class DiscountEvents {
+    private static final String GIFT_EVENT = "증정 이벤트";
+    private final Map<String, Integer> appliedEvents = new HashMap<>();
+    private int totalDiscountAmount = 0;
 
     public void addDiscountEvent(String eventName, int discountAmount) {
-        // 할인 이벤트를 Map에 추가
-        discountEvents.put(eventName, discountAmount);
-        if (!Objects.equals(eventName, "증정 이벤트")) {
-            totalDiscountPrice += discountAmount;
+        appliedEvents.put(eventName, discountAmount);
+        updateTotalDiscountAmount(eventName, discountAmount);
+    }
+
+    private void updateTotalDiscountAmount(String eventName, int discountAmount) {
+        if (!isGiftEvent(eventName)) {
+            totalDiscountAmount += discountAmount;
         }
     }
 
-    public String generateAllDiscountEventsString() {
+    private boolean isGiftEvent(String eventName) {
+        return Objects.equals(eventName, GIFT_EVENT);
+    }
+
+    public int getTotalDiscountAmount() {
+        return totalDiscountAmount;
+    }
+
+    public String formatAppliedEventsOutput() {
+        if (appliedEvents.isEmpty()) {
+            return NOTHING;
+        }
+
         StringBuilder formattedDiscountEvents = new StringBuilder();
-
-        if (discountEvents.isEmpty()) {
-            return "없음";
-        }
-
-        int count = 0;
-        for (Map.Entry<String, Integer> discountEntry : discountEvents.entrySet()) {
-            String eventName = discountEntry.getKey();
-            int discountPrice = discountEntry.getValue();
-
-            String formattedDiscount = String.format("%s: -%,d원", eventName, discountPrice);
-            formattedDiscountEvents.append(formattedDiscount);
-
-            // 현재 엔트리가 마지막이 아니라면 줄바꿈 추가
-            if (++count < discountEvents.size()) {
-                formattedDiscountEvents.append("\n");
-            }
-        }
+        appliedEvents.forEach((eventName, discountAmount) ->
+                formattedDiscountEvents.append(formatDiscountEventOutput(eventName, discountAmount)));
 
         return formattedDiscountEvents.toString();
     }
 
-    public String generateTotalDiscountOutput(int totalDiscountAmount) {
-        if (totalDiscountAmount != 0) {
-            return String.format("-%,d원", totalDiscountAmount);
-        }
-        return "없음";
+    private String formatDiscountEventOutput(String eventName, int discountAmount) {
+        return String.format("%s: -%,d%s\n", eventName, discountAmount, WON);
     }
 
-    public int calculateTotalDiscountPrice() {
-        return discountEvents.values().stream().mapToInt(Integer::intValue).sum();
+    public String formatTotalDiscountAmountOutput() {
+        if (totalDiscountAmount != 0) {
+            return String.format("-%,d%s", totalDiscountAmount, WON);
+        }
+        return NOTHING;
+    }
+
+    public int getTotalAppliedEventsAmount() {
+        return appliedEvents.values().stream().mapToInt(Integer::intValue).sum();
     }
 }
