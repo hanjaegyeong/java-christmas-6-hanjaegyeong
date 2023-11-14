@@ -32,6 +32,8 @@ public class OrderProcessor {
         String menuName = extractMenuName(menuAndQuantity);
         int quantity = extractQuantity(menuAndQuantity);
 
+        validateQuantity(quantity);
+
         Menu menu = findMenuByName(menuName);
 
         orderMenus.put(menu, quantity);
@@ -51,6 +53,12 @@ public class OrderProcessor {
             return Integer.parseInt(quantityString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private void validateQuantity(int quantity) {
+        if (quantity < 1) {
+            throw new IllegalArgumentException("[오류] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
