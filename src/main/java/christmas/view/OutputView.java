@@ -25,4 +25,16 @@ public class OutputView {
         System.out.println(text);
         System.out.print(LINE_SEPARATOR);
     }
+
+    public static void printTotalBenefits(String text) {
+        System.out.println("<총혜택 금액>");
+        System.out.println(text);
+        System.out.print(LINE_SEPARATOR);
+    }
+
+    public static void printFinalPrice(int price) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%,d원\n", price); //여기 -원도 스트링 만들어서 오기
+        System.out.print(LINE_SEPARATOR);
+    }
 }
