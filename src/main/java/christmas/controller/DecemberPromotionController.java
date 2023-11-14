@@ -2,7 +2,7 @@ package christmas.controller;
 
 import christmas.domain.*;
 import christmas.domain.decorator.AdditionalDiscountDecoratorFactory;
-import christmas.domain.price.TotalOrderAmount;
+import christmas.domain.TotalOrderAmount;
 import christmas.domain.strategy.BasicDiscountStrategy;
 import christmas.domain.strategy.BasicDiscountStrategyFactory;
 import christmas.view.InputView;
