@@ -21,6 +21,13 @@ public class DiscountEvents {
         }
     }
 
+    public String getTotalDiscountOutput(int totalDiscountAmount) {
+        if (totalDiscountAmount != 0) {
+            return String.format("-%,d원", totalDiscountAmount);
+        }
+        return "없음";
+    }
+
     public int calculateTotalDiscountPrice() {
         return discountEvents.values().stream().mapToInt(Integer::intValue).sum();
     }
