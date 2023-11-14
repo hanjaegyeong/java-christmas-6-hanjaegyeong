@@ -2,49 +2,51 @@ package christmas.view;
 
 public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String CURRENCY_SUFFIX = "원";
+    private static final String ORDER_SUMMARY_TITLE = "<주문 메뉴>";
+    private static final String TOTAL_ORDER_PRICE_TITLE = "<할인 전 총주문 금액>";
+    private static final String GIFT_EVENT_SUMMARY_TITLE = "<증정 메뉴>";
+    private static final String DISCOUNT_SUMMARY_TITLE = "<혜택 내역>";
+    private static final String TOTAL_BENEFITS_TITLE = "<총혜택 금액>";
+    private static final String FINAL_PRICE_TITLE = "<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE_TITLE = "<12월 이벤트 배지>";
 
     public static void printOrderSummary(String text) {
-        System.out.println("<주문 메뉴>");
-        System.out.println(text);
+        printWithTitle(ORDER_SUMMARY_TITLE, text);
     }
 
     public static void printTotalOrderPrice(String text) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.println(text);
-        System.out.print(LINE_SEPARATOR);
+        printWithTitle(TOTAL_ORDER_PRICE_TITLE, text);
     }
 
     public static void printGiftEventSummary(String text) {
-        System.out.println("<증정 메뉴>");
-        System.out.println(text);
-        System.out.print(LINE_SEPARATOR);
+        printWithTitle(GIFT_EVENT_SUMMARY_TITLE, text);
     }
 
     public static void printDiscountSummary(String text) {
-        System.out.println("<혜택 내역>");
-        System.out.println(text);
-        System.out.print(LINE_SEPARATOR);
+        printWithTitle(DISCOUNT_SUMMARY_TITLE, text);
     }
 
     public static void printTotalBenefits(String text) {
-        System.out.println("<총혜택 금액>");
-        System.out.println(text);
-        System.out.print(LINE_SEPARATOR);
+        printWithTitle(TOTAL_BENEFITS_TITLE, text);
     }
 
     public static void printFinalPrice(int price) {
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.printf("%,d원\n", price); //여기 -원도 스트링 만들어서 오기
-        System.out.print(LINE_SEPARATOR);
+        System.out.println(FINAL_PRICE_TITLE);
+        System.out.printf("%,d" + CURRENCY_SUFFIX + LINE_SEPARATOR, price);
     }
 
     public static void printEventBadge(String text) {
-        System.out.println("<12월 이벤트 배지>");
-        System.out.println(text);
-        System.out.print(LINE_SEPARATOR);
+        printWithTitle(EVENT_BADGE_TITLE, text);
     }
 
     public static void printExceptionMessage(Exception exception) {
         System.out.println(exception.getMessage());
+    }
+
+    private static void printWithTitle(String title, String text) {
+        System.out.println(title);
+        System.out.println(text);
+        System.out.print(LINE_SEPARATOR);
     }
 }
