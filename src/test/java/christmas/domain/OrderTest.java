@@ -55,6 +55,12 @@ public class OrderTest {
     @Test
     @DisplayName("주문 수량이 1 미만인 경우 예외가 발생해야 한다.")
     public void testCreateOrder_ValidateQuantity() {
-        assertThrows(InvalidOrderException.class, () -> order.createOrder("제로콜라0"));
+        assertThrows(InvalidOrderException.class, () -> order.createOrder("바비큐립-0"));
+    }
+
+    @Test
+    @DisplayName("메뉴판에 없는 메뉴를 주문 시 예외가 발생해야 한다.")
+    public void testCreateOrder_findMenuByName() {
+        assertThrows(InvalidOrderException.class, () -> order.createOrder("오징어덮밥-2"));
     }
 }
