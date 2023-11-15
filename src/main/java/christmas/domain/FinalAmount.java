@@ -13,6 +13,6 @@ public class FinalAmount {
     }
 
     private static String formatFinalAmountOutput(int finalAmount) {
-        return String.format("-%,d%s", finalAmount, WON);
+        return String.format("%,d%s", finalAmount, WON);
     }
 }
