@@ -3,7 +3,7 @@ package christmas.domain;
 import christmas.domain.menu.Menu;
 import java.util.EnumMap;
 
-import static christmas.utils.constants.WON;
+import static christmas.utils.Constants.WON;
 
 public class TotalOrderAmount {
     public static int calculateTotalOrderAmount(EnumMap<Menu, Integer> orderMenus) {

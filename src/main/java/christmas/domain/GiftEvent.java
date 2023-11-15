@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.utils.constants.NOTHING;
+import static christmas.utils.Constants.NOTHING;
 
 public class GiftEvent {
     private static final int GIFT_EVENT_THRESHOLD = 120_000;

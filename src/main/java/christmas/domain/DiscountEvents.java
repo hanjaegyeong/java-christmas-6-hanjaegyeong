@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static christmas.utils.constants.*;
+import static christmas.utils.Constants.*;
 
 public class DiscountEvents {
     private static final String GIFT_EVENT = "증정 이벤트";

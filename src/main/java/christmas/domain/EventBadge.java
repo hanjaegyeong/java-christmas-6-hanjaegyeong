@@ -3,7 +3,7 @@ package christmas.domain;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import static christmas.utils.constants.NOTHING;
+import static christmas.utils.Constants.NOTHING;
 
 public enum EventBadge {
     STAR("별", 5_000),

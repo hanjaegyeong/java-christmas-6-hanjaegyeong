@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.utils.Constants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
@@ -28,6 +29,6 @@ public class GiftEventTest {
         String result = GiftEvent.generateGiftEventOutput(totalAppliedEventsAmount, mockDiscountEvents);
 
         verify(mockDiscountEvents, never()).addDiscountEvent(anyString(), anyInt());
-        assertEquals(christmas.utils.constants.NOTHING, result);
+        assertEquals(Constants.NOTHING, result);
     }
 }

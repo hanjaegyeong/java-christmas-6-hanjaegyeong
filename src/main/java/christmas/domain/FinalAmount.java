@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.utils.constants.WON;
+import static christmas.utils.Constants.WON;
 
 public class FinalAmount {
     public static String calculateAndFormatFinalAmountOutput(int totalOrderAmount, DiscountEvents discountEvents) {
