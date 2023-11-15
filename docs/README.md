@@ -99,9 +99,10 @@ christmas/
 - IllegalArgumentException을 상속받아 날짜 입력 예외, 주문 입력 예외 두 커스텀 예외 클래스를 생성
 - 각 커스텀 예외 클래스에서는 공통적인 로직인 '[ERROR] ' prefix와 에러 메시지 출력 후 Line seperating을 일괄적으로 처리
 
-#### 메뉴판 enum 클래스로 관리
-- 메뉴판에 해당하는 상수들을 Menu라는 enum 클래스에서 관리하도록 함
-- 각 메뉴 중 Category에 해당하는 상수는 따로 MenuCategory enum 클래스에서 관리하여 매직넘버를 최소화하고 유지보수성을 높임
+#### 메뉴판, 이벤트 배지 enum 클래스로 관리
+- 메뉴판에 해당하는 상수들을 Menu라는 enum 클래스에서 관리, 관련 로직 처리
+- 각 메뉴 중 Category에 해당하는 상수는 따로 MenuCategory enum 클래스에서 관리
+- 이벤트 배지에 해당하는 상수들도 EventBadge라는 enum 클래스에서 관리, 관련 로직 처리
 
 #### 상수 분리
 - 특정 클래스에서만 쓰이는 상수는 해당 클래스에 정의
