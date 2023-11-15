@@ -1,7 +1,7 @@
-package christmas.domain.decorator;
+package christmas.domain.events.discounts.decorators;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.strategy.BasicDiscountStrategy;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.events.discounts.strategies.BasicDiscountStrategy;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.events;
 
 import static christmas.utils.Constants.NOTHING;
 

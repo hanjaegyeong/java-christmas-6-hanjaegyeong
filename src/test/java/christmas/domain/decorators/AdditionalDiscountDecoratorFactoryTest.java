@@ -1,9 +1,10 @@
-package christmas.domain.decorator;
+package christmas.domain.decorators;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.strategy.BasicDiscountStrategy;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.events.discounts.decorators.AdditionalDiscountDecoratorFactory;
+import christmas.domain.events.discounts.strategies.BasicDiscountStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;

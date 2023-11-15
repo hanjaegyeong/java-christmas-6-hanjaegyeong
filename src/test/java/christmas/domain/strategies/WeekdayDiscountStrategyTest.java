@@ -1,7 +1,8 @@
-package christmas.domain.strategy;
+package christmas.domain.strategies;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.Order;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.order.Order;
+import christmas.domain.events.discounts.strategies.WeekdayDiscountStrategy;
 import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.domain.menu.Menu;
+import christmas.domain.order.TotalOrderAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

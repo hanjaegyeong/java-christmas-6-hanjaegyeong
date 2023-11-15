@@ -1,7 +1,7 @@
-package christmas.domain.decorator;
+package christmas.domain.events.discounts.decorators;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.strategy.BasicDiscountStrategy;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.events.discounts.strategies.BasicDiscountStrategy;
 
 public class ChristmasDDayDiscountDecorator extends AdditionalDiscountDecorator {
     private static final int BASE_DISCOUNT_AMOUNT = 1000;

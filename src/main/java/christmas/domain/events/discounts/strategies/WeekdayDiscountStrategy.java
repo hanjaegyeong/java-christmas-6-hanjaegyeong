@@ -1,7 +1,7 @@
-package christmas.domain.strategy;
+package christmas.domain.events.discounts.strategies;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.Order;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.order.Order;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuCategory;
 

@@ -1,5 +1,6 @@
-package christmas.domain;
+package christmas.domain.order;
 
+import christmas.domain.exceptions.InvalidOrderException;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuCategory;
 

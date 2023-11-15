@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.events.GiftEvent;
 import christmas.utils.Constants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

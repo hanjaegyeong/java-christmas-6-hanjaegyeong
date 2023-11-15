@@ -1,7 +1,8 @@
-package christmas.domain.decorator;
+package christmas.domain.decorators;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.strategy.BasicDiscountStrategy;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.events.discounts.decorators.ChristmasDDayDiscountDecorator;
+import christmas.domain.events.discounts.strategies.BasicDiscountStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

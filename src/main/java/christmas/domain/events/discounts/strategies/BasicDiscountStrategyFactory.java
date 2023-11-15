@@ -1,9 +1,9 @@
-package christmas.domain.strategy;
+package christmas.domain.events.discounts.strategies;
 
-import christmas.domain.DiscountEvents;
-import christmas.domain.Order;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.order.Order;
 
-import static christmas.domain.ReservationDayProcessor.isWeekend;
+import static christmas.domain.order.ReservationDayProcessor.isWeekend;
 
 public class BasicDiscountStrategyFactory {
     public static BasicDiscountStrategy createDiscountStrategy(int reservationDay, Order orderProcessor, DiscountEvents discountEvents) {

@@ -1,10 +1,15 @@
 package christmas.controller;
 
-import christmas.domain.*;
-import christmas.domain.decorator.AdditionalDiscountDecoratorFactory;
-import christmas.domain.TotalOrderAmount;
-import christmas.domain.strategy.BasicDiscountStrategy;
-import christmas.domain.strategy.BasicDiscountStrategyFactory;
+import christmas.domain.events.DiscountEvents;
+import christmas.domain.events.EventBadge;
+import christmas.domain.events.GiftEvent;
+import christmas.domain.events.discounts.decorators.AdditionalDiscountDecoratorFactory;
+import christmas.domain.order.FinalAmount;
+import christmas.domain.order.TotalOrderAmount;
+import christmas.domain.events.discounts.strategies.BasicDiscountStrategy;
+import christmas.domain.events.discounts.strategies.BasicDiscountStrategyFactory;
+import christmas.domain.order.Order;
+import christmas.domain.order.ReservationDayProcessor;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 

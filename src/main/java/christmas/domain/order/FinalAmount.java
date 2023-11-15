@@ -1,4 +1,6 @@
-package christmas.domain;
+package christmas.domain.order;
+
+import christmas.domain.events.DiscountEvents;
 
 import static christmas.utils.Constants.WON;
 
