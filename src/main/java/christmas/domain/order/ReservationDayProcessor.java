@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 public class ReservationDayProcessor {
     private static final String INVALID_DATE_MESSAGE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String RESERVATION_YEAR = "2023";
+    private static final String RESERVATION_MONTH = "12";
 
     public static void validateDay(int reservationDay) {
         if (reservationDay < 1 || reservationDay > 31) {
@@ -23,7 +25,7 @@ public class ReservationDayProcessor {
     }
 
     private static LocalDate parseDate(int reservationDay) {
-        String date = String.format("202312%02d", reservationDay);
+        String date = String.format(RESERVATION_YEAR + RESERVATION_MONTH + "%02d", reservationDay);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         return LocalDate.parse(date, formatter);
     }
