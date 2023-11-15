@@ -36,8 +36,47 @@
 ### 6. 단위 테스트 작성
 - 모든 핵심 로직에 대한 단위 테스트 구현
 
+---
+
+## 프로젝트 구조
+```
+christmas/
+├── controller/
+│ └── DecemberPromotionController.java
+├── domain/
+│ ├── events/
+│ │ └── discounts/
+│ │   ├── decorators/
+│ │   │ ├── AdditionalDiscountDecorator.java
+│ │   │ ├── ChristmasDDayDiscountDecorator.java
+│ │   │ └── SpecialDiscountDecorator.java
+│ │   │ └── AdditionalDiscountDecoratorFactory.java
+│ │   └── strategies/
+│ │     ├── BasicDiscountStrategy.java
+│ │     ├── WeekdayDiscountStrategy.java
+│ │     ├── WeekendDiscountStrategy.java
+│ │     └── BasicDiscountStrategyFactory.java
+│ ├── menu/
+│ │ ├── Menu.java
+│ │ └── MenuCategory.java
+│ └── order/
+│   ├── FinalAmount.java
+│   ├── Order.java
+│   ├── ReservationDayProcessor.java
+│   └── TotalOrderAmount.java
+├── exceptions/
+│ ├── InvalidDayException.java
+│ └── InvalidOrderException.java
+├── utils/
+│ └── Constants.java
+└── view/
+  ├── InputView.java
+  └── OutputView.java
+```
+
+
 
 ---
 
-### 테스트 커버리지
+## 테스트 커버리지
 ![img.png](img.png)
