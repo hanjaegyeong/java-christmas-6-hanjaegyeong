@@ -36,7 +36,7 @@ public class WeekdayDiscountStrategy implements BasicDiscountStrategy {
         for (Menu menu : orderMenus.keySet()) {
             if (menu.getCategory() == MenuCategory.DESSERT) {
                 int quantity = orderMenus.getOrDefault(menu, 0);
-                weekdayDiscount -= quantity * DESSERT_DISCOUNT_AMOUNT;
+                weekdayDiscount += quantity * DESSERT_DISCOUNT_AMOUNT;
             }
         }
 
