@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 public class Order {
     private static final int MAX_TOTAL_QUANTITY = 20;
     private static final String INVALID_ORDER_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    private static final String ORDER_SEPARATOR = "-";
+    private static final String MENU_QUANTITY_SEPARATOR = "-";
+    private static final String ORDER_SEPARATOR = ",";
     private static final String QUANTITY_SUFFIX = "개";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
@@ -31,7 +32,7 @@ public class Order {
     }
 
     private List<String> splitOrders(String userInput) {
-        return Arrays.asList(userInput.split(","));
+        return Arrays.asList(userInput.split(ORDER_SEPARATOR));
     }
 
     private void processOrder(String order) {
@@ -51,7 +52,7 @@ public class Order {
     }
 
     private List<String> splitMenuAndQuantity(String order) {
-        return Arrays.asList(order.split(ORDER_SEPARATOR));
+        return Arrays.asList(order.split(MENU_QUANTITY_SEPARATOR));
     }
 
     private String extractMenuName(List<String> menuAndQuantity) {
@@ -89,7 +90,7 @@ public class Order {
     }
 
     private void validateOrderFormat(String order) {
-        if (!order.contains("-")) {
+        if (!order.contains(MENU_QUANTITY_SEPARATOR)) {
             throw new InvalidOrderException(INVALID_ORDER_MESSAGE);
         }
     }
