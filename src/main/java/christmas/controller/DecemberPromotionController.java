@@ -12,16 +12,11 @@ public class DecemberPromotionController {
     private static final int MINIMUM_ORDER_AMOUNT_FOR_DISCOUNT = 10000;
 
     public void run() {
-        try {
-            planDecemberReservation();
-        } catch (IllegalArgumentException e) {
-            OutputView.printExceptionMessage(e);
-        }
+        planDecemberReservation();
     }
 
     private void planDecemberReservation() {
-        int reservationDay = InputView.inputReservationDay();
-        ReservationDayProcessor.validateDay(reservationDay);
+        int reservationDay = inputReservationDayWithValidation();
 
         Order order = createAndValidateOrder();
 
@@ -32,11 +27,27 @@ public class DecemberPromotionController {
         printOrderSummary(order, discountEvents, totalOrderAmount);
     }
 
+    private static int inputReservationDayWithValidation() {
+        try {
+            int reservationDay = InputView.inputReservationDay();
+            ReservationDayProcessor.validateDay(reservationDay);
+            return reservationDay;
+        } catch (IllegalArgumentException e) {
+            OutputView.printExceptionMessage(e);
+            return inputReservationDayWithValidation();
+        }
+    }
+
     private Order createAndValidateOrder() {
-        String orderInput = InputView.inputOrder();
-        Order order = new Order();
-        order.createOrder(orderInput);
-        return order;
+        try {
+            String orderInput = InputView.inputOrder();
+            Order order = new Order();
+            order.createOrder(orderInput);
+            return order;
+        } catch (IllegalArgumentException e) {
+            OutputView.printExceptionMessage(e);
+            return createAndValidateOrder();
+        }
     }
 
     private DiscountEvents applyDiscountsIfNeeded(Order order, int totalOrderAmount, int reservationDay) {
