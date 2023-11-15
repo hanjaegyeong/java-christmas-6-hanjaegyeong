@@ -15,7 +15,6 @@ public class Order {
     private static final String QUANTITY_SUFFIX = "개";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
-
     private final EnumMap<Menu, Integer> orderMenus = new EnumMap<>(Menu.class);
     private int totalQuantity = 0;
 
