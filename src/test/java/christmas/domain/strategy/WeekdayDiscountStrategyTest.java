@@ -33,7 +33,7 @@ public class WeekdayDiscountStrategyTest {
         WeekdayDiscountStrategy strategy = new WeekdayDiscountStrategy(orderProcessor, discountPrices);
         strategy.applyDiscount();
 
-        verify(discountPrices).addDiscountEvent("평일 할인", -4046);
+        verify(discountPrices).addDiscountEvent("평일 할인", 4046);
     }
 
     @Test
