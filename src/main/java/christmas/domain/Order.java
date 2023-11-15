@@ -110,7 +110,7 @@ public class Order {
     public static String generateOrderOutput(EnumMap<Menu, Integer> orderMap) {
         return orderMap.entrySet().stream()
                 .map(entry -> entry.getKey().getName() + " " + entry.getValue() + QUANTITY_SUFFIX)
-                .collect(Collectors.joining(LINE_SEPARATOR)) + LINE_SEPARATOR;
+                .collect(Collectors.joining(LINE_SEPARATOR));
     }
 
     public EnumMap<Menu, Integer> getOrderMenus() {
