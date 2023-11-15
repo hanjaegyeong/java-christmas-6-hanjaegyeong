@@ -1,4 +1,4 @@
-package christmas.domain.exceptions;
+package christmas.exceptions;
 
 import static christmas.utils.Constants.LINE_SEPARATOR;
 

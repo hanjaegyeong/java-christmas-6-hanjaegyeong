@@ -1,15 +1,17 @@
 package christmas.domain.order;
 
+import christmas.exceptions.InvalidDayException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class ReservationDayProcessor {
-    private static final String INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String INVALID_DATE_MESSAGE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
 
     public static void validateDay(int reservationDay) {
         if (reservationDay < 1 || reservationDay > 31) {
-            throw new IllegalArgumentException(INVALID_DATE_MESSAGE);
+            throw new InvalidDayException(INVALID_DATE_MESSAGE);
         }
     }
 

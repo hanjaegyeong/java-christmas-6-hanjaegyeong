@@ -16,7 +16,7 @@ public class ReservationDayProcessorTest {
             ReservationDayProcessor.validateDay(invalidDay);
         });
 
-        assertEquals("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.", exception.getMessage());
+        assertEquals("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요." + System.lineSeparator(), exception.getMessage());
     }
 
     @Test
