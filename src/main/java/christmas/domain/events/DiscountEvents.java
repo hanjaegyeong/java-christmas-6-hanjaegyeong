@@ -9,6 +9,7 @@ import static christmas.utils.Constants.*;
 
 public class DiscountEvents {
     private static final String GIFT_EVENT = "증정 이벤트";
+    private static final String MINUS = "-";
     private final Map<String, Integer> appliedEvents = new HashMap<>();
     private int totalDiscountAmount = 0;
 
@@ -42,13 +43,13 @@ public class DiscountEvents {
     }
 
     private String formatDiscountEventOutput(String eventName, int discountAmount) {
-        return String.format("%s: -%,d%s", eventName, discountAmount, WON);
+        return String.format("%s: %s%,d%s", eventName, MINUS, discountAmount, WON);
     }
 
     public String formatTotalDiscountAmountOutput() {
         int totalAppliedEventsAmount = getTotalAppliedEventsAmount();
         if (totalAppliedEventsAmount != 0) {
-            return String.format("-%,d%s", totalAppliedEventsAmount, WON);
+            return String.format("%s%,d%s", MINUS, totalAppliedEventsAmount, WON);
         }
         return NOTHING;
     }
