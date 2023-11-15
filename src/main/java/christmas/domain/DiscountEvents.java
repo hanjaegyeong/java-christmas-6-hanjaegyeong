@@ -46,8 +46,9 @@ public class DiscountEvents {
     }
 
     public String formatTotalDiscountAmountOutput() {
-        if (totalDiscountAmount != 0) {
-            return String.format("-%,d%s", totalDiscountAmount, WON);
+        int totalAppliedEventsAmount = getTotalAppliedEventsAmount();
+        if (totalAppliedEventsAmount != 0) {
+            return String.format("-%,d%s", totalAppliedEventsAmount, WON);
         }
         return NOTHING;
     }
