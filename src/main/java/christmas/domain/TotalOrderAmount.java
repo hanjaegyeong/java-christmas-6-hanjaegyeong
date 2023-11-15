@@ -6,17 +6,13 @@ import java.util.EnumMap;
 import static christmas.utils.constants.WON;
 
 public class TotalOrderAmount {
-    private int totalOrderAmount;
-
-    public int calculateTotalOrderAmount(EnumMap<Menu, Integer> orderMenus) {
-        totalOrderAmount = orderMenus.entrySet().stream()
+    public static int calculateTotalOrderAmount(EnumMap<Menu, Integer> orderMenus) {
+        return orderMenus.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
-
-        return totalOrderAmount;
     }
 
-    public String formatTotalOrderAmount() {
+    public static String formatTotalOrderAmount(int totalOrderAmount) {
         return String.format("%,d%s", totalOrderAmount, WON);
     }
 }

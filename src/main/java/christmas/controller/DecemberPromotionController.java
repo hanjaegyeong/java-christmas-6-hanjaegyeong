@@ -9,7 +9,7 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class DecemberPromotionController {
-    private static final int MINIMUM_ORDER_AMOUNT_FOR_DISCOUNT = 10000;
+    private static final int MINIMUM_ORDER_AMOUNT_FOR_DISCOUNT = 10_000;
 
     public void run() {
         planDecemberReservation();
@@ -18,10 +18,8 @@ public class DecemberPromotionController {
     private void planDecemberReservation() {
         int reservationDay = inputReservationDayWithValidation();
 
-        Order order = createAndValidateOrder();
-
-        TotalOrderAmount totalOrderAmountCalculator = new TotalOrderAmount();
-        int totalOrderAmount = totalOrderAmountCalculator.calculateTotalOrderAmount(order.getOrderMenus());
+        Order order = inputAndCreateOrderWithValidation();
+        int totalOrderAmount = TotalOrderAmount.calculateTotalOrderAmount(order.getOrderMenus());
 
         DiscountEvents discountEvents = applyDiscountsIfNeeded(order, totalOrderAmount, reservationDay);
         printOrderSummary(order, discountEvents, totalOrderAmount);
@@ -38,7 +36,7 @@ public class DecemberPromotionController {
         }
     }
 
-    private Order createAndValidateOrder() {
+    private Order inputAndCreateOrderWithValidation() {
         try {
             String orderInput = InputView.inputOrder();
             Order order = new Order();
@@ -46,7 +44,7 @@ public class DecemberPromotionController {
             return order;
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
-            return createAndValidateOrder();
+            return inputAndCreateOrderWithValidation();
         }
     }
 
@@ -62,7 +60,7 @@ public class DecemberPromotionController {
 
     private void printOrderSummary(Order order, DiscountEvents discountEvents, int totalOrderAmount) {
         OutputView.printOrderSummary(Order.generateOrderOutput(order.getOrderMenus()));
-        OutputView.printTotalOrderAmount(new TotalOrderAmount().formatTotalOrderAmount());
+        OutputView.printTotalOrderAmount(TotalOrderAmount.formatTotalOrderAmount(totalOrderAmount));
         OutputView.printGiftEventSummary(GiftEvent.generateGiftEventOutput(totalOrderAmount, discountEvents));
         OutputView.printDiscountSummary(discountEvents.formatAppliedEventsOutput());
         OutputView.printTotalBenefits(discountEvents.formatTotalDiscountAmountOutput());
