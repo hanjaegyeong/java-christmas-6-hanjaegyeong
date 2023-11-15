@@ -22,11 +22,10 @@ public class WeekendDiscountStrategyTest {
     }
 
     @Test
-    @DisplayName("주말 주문 시 메인메뉴 한 개당 2023원이 할인된다.")
+    @DisplayName("주말 주문 시 메인메뉴 한 개당 할인이 적용된다.")
     public void testApplyDiscount_WeekendMainCourseDiscount() {
         EnumMap<Menu, Integer> orderMenus = new EnumMap<>(Menu.class);
-        orderMenus.put(Menu.TAPAS, 2);
-        orderMenus.put(Menu.ICE_CREAM, 3);
+        orderMenus.put(Menu.SEAFOOD_PASTA, 2);
 
         when(orderProcessor.getOrderMenus()).thenReturn(orderMenus);
 
@@ -37,10 +36,10 @@ public class WeekendDiscountStrategyTest {
     }
 
     @Test
-    @DisplayName("주말 주문 중 주말 할인 대상 메뉴 주문하지 않은 경우 할인이 적용되지 않는다.")
+    @DisplayName("주말 주문 중 메인메뉴가 아닌 경우 할인이 적용되지 않는다.")
     public void testApplyDiscount_NoWeekendMainCourseDiscount() {
         EnumMap<Menu, Integer> orderMenus = new EnumMap<>(Menu.class);
-        orderMenus.put(Menu.CHOCOLATE_CAKE, 3);
+        orderMenus.put(Menu.ICE_CREAM, 3);
 
         when(orderProcessor.getOrderMenus()).thenReturn(orderMenus);
 
