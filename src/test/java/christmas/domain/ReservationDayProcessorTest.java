@@ -1,35 +1,46 @@
 package christmas.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class ReservationDayProcessorTest {
-
     @Test
-    @DisplayName("유효한 날짜인 경우 예외가 발생하지 않아야 한다.")
-    public void testValidateDay_ValidDay() {
-        assertDoesNotThrow(() -> ReservationDayProcessor.validateDay(15));
+    @DisplayName("유효하지 않은 예약일에 대해 예외를 던져야 한다.")
+    public void testValidateDay_InvalidDate() {
+        int invalidDay = 32;
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ReservationDayProcessor.validateDay(invalidDay);
+        });
+
+        assertEquals("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.", exception.getMessage());
     }
 
     @Test
-    @DisplayName("유효하지 않은 날짜인 경우 예외가 발생해야 한다.")
-    public void testValidateDay_InvalidDay() {
-        assertThrows(IllegalArgumentException.class, () -> ReservationDayProcessor.validateDay(0));
-        assertThrows(IllegalArgumentException.class, () -> ReservationDayProcessor.validateDay(32));
+    @DisplayName("유효한 예약일은 예외를 던지지 않아야 한다.")
+    public void testValidateDay_ValidDate() {
+        int validDay = 15;
+
+        assertDoesNotThrow(() -> ReservationDayProcessor.validateDay(validDay));
     }
 
     @Test
-    @DisplayName("주말인 경우 true를 반환해야 한다.")
-    public void testIsWeekend_WeekendDay() {
-        assertTrue(ReservationDayProcessor.isWeekend(3)); // 토요일
-        assertTrue(ReservationDayProcessor.isWeekend(4)); // 일요일
+    @DisplayName("예약일이 주말인 경우 true를 반환해야 한다.")
+    public void testIsWeekend_Weekend() {
+        // 2023년 12월 3일은 일요일
+        int weekendDay = 3;
+
+        assertTrue(ReservationDayProcessor.isWeekend(weekendDay));
     }
 
     @Test
-    @DisplayName("평일인 경우 false를 반환해야 한다.")
+    @DisplayName("예약일이 평일인 경우 false를 반환해야 한다.")
     public void testIsWeekend_Weekday() {
-        assertFalse(ReservationDayProcessor.isWeekend(6)); // 금요일
-        assertFalse(ReservationDayProcessor.isWeekend(10)); // 수요일
+        // 2023년 12월 1일은 금요일
+        int weekdayDay = 1;
+
+        assertFalse(ReservationDayProcessor.isWeekend(weekdayDay));
     }
 }
