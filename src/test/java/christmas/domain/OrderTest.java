@@ -2,7 +2,7 @@ package christmas.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.domain.exceptions.InvalidOrderException;
+import christmas.exceptions.InvalidOrderException;
 import christmas.domain.order.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
